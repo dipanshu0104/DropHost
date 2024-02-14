@@ -1,0 +1,84 @@
+<% include ./partials/header.ejs %>
+<div class="overlay"></div>
+    <div class="right">
+        <div class="manager">
+            <h1>My files</h1>
+            <div class="main-box">
+                <div class="content-box">
+                    <div class="file-nav">
+                        <div class="search">
+                            <input type="text" id="search-input" placeholder="Search-file">
+                            <button><img src="icons/search.svg" alt="search"></button>
+                        </div>
+                        <img src="icons/dots.svg" alt="dots">
+                    </div>
+                    <div class="file-box">
+                        <% files.forEach(file => { %>
+                        <div class="main-file">
+                            <div class="left-info">
+                                <h3 class="result-item"><%= file.name %></h3>
+                                <p><%= file.size %></p>
+                            </div>
+                            <div class="dropdown">
+                                <img src="icons/dots.svg" alt="menu">
+                                <div class="options">
+                                    <div class="option"><a href="/download/<%= file.name %>"><img src="/icons/download- arrow.svg" alt="download">Download</a></div>
+                                    <div class="option"><a href="/delete/<%= file.name %>"><img src="/icons/trash.svg" alt="delete">Delete</a></div>
+                                    <div class="option"><a href="#"><img src="/icons/edit.svg" alt="rename">Rename</a>
+                                        <form action="/rename" method="post" style="display: inline;">
+                                            <input type="hidden" name="oldFileName" value="<%= file.name %>">
+                                            <input type="text" name="newFileName" placeholder="New name" required>
+                                           <button type="submit">Rename</button> 
+                                          </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const dropdowns = document.querySelectorAll(".dropdown");
+
+    dropdowns.forEach((dropdown) => {
+        const dots = dropdown.querySelector("img");
+        const options = dropdown.querySelector(".options");
+
+        dots.addEventListener("click", function () {
+            options.style.display = options.style.display === "block" ? "none" : "block";
+        });
+
+        document.addEventListener("click", function (event) {
+            if (!dropdown.contains(event.target)) {
+                options.style.display = "none";
+            }
+        });
+    });
+});
+
+
+//  search bar logic.
+
+document.getElementById('search-input').addEventListener('input', function() {
+      var searchTerm = this.value.toLowerCase();
+      var items = document.getElementsByClassName('result-item');
+      var list = document.getElementsByClassName("main-file")
+
+      for (var i = 0; i < items.length; i++) {
+        var text = items[i].textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+          list[i].style.display = 'flex';      
+        } else {
+          list[i].style.display = 'none';
+        }
+      }
+    });
+
+    </script>
+
+    <% include ./partials/footer.ejs %>
