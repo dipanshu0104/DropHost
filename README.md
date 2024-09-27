@@ -7,7 +7,7 @@ Your self hosted file uploading server (NAS).
 
 #### live demo 
 
-- [DropHost-live](https://drophost-rbhb.onrender.com)
+- [DropHost-live](https://drophost-w0sx.onrender.com)
 
 # What is DropHost? 
 
