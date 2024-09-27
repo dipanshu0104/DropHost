@@ -1,0 +1,186 @@
+<%- include('partials/header') %>
+    <div class="overlay"></div>
+    <div class="right">
+        <div class="manager">
+            <h1>My files</h1>
+            <div class="main-box">
+                <div class="content-box">
+                    <div class="file-nav">
+                        <div class="search">
+                            <input type="text" id="search-input" placeholder="Search-file">
+                            <button><img src="icons/search.svg" alt="search"></button>
+                        </div>
+
+                        <div class="dropdown">
+                            <img src="icons/dots.svg" alt="menu">
+                            <div class="options">
+                                <div class="option">
+                                    <a href="#"><input type="checkbox" onclick="check()" id="option-select">
+                                        <label for="option-select">Select All</label></a>
+                                </div>
+                                <div class="option , b1" name="btn1"><a><img src="/icons/trash.svg" alt="delete">Delete
+                                        All</a>
+                                </div>
+
+                                <div class="option , b2" name="btn2"><a><img src="/icons/download- arrow.svg"
+                                            alt="delete">Download
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <form id="deleteform" action="/delete-download" method="post">
+                        <div class="file-box">
+                            <form action=""></form>
+                            <% if (files.length<=0) { %>
+                                <div class="no-file">
+                                    <img src="/icons/open-folder.png" alt="folder">
+                                    <h2>No Files</h2>
+                                </div>
+                                
+                              <% } else { %>
+                                <% files.forEach(file=> { %>
+                                    <div class="main-file">
+                                        <input type="checkbox" name="files" value="<%= file.name %>">
+                                        <div class="left-info">
+                                            <h3 class="result-item">
+                                                <%= file.name %>
+                                            </h3>
+                                            <p>
+                                                <span><%= file.size %></span> &nbsp; | &nbsp; <span><%= file.date %></span>
+                                            </p>
+                                        </div>
+                                        <div class="dropdown">
+                                            <img class="file-dot" src="icons/dots.svg" alt="menu">
+                                            <div class="options">
+                                                <div class="option"><a href="/download/<%= file.name %>"><img
+                                                            src="/icons/download- arrow.svg" alt="download">Download</a>
+                                                </div>
+                                                <div class="option"><a href="/delete/<%= file.name %>"><img
+                                                            src="/icons/trash.svg" alt="delete">Delete</a></div>
+                                                <div class="option" onclick="showRenameModal('<%= file.name %>')"><a href="#"><img
+                                                            src="/icons/edit.svg" alt="rename">Rename</a>
+                                                </div>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="modal-<%= file.name %>" class="modal">
+                                        <div class="modal-content">
+                                            <span class="close"
+                                                onclick="closeRenameModal('<%= file.name %>')">&times;</span>
+                                            <form action="/rename" class="rename-form" method="POST">
+                                                <input type="hidden" name="oldFileName" value="<%= file.name %>">
+                                                <label for="newName-<%= file.name %>">New Name:</label>
+                                                <input type="text" id="newName-<%= file.name %>" name="newFileName"
+                                                    placeholder="<%= file.name %>">
+                                                <button type="submit">Rename</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                              <% } %>
+                            
+                                    <input type="checkbox" name="deleteBox" id="delcheck" style="display: none;">
+                                    <input type="checkbox" name="downloadBox" id="downcheck" style="display: none;">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dropdowns = document.querySelectorAll(".dropdown");
+
+            dropdowns.forEach((dropdown) => {
+                const dots = dropdown.querySelector("img");
+                const options = dropdown.querySelector(".options");
+
+                dots.addEventListener("click", function () {
+                    options.style.display = options.style.display === "block" ? "none" : "block";
+                });
+
+                document.addEventListener("click", function (event) {
+                    if (!dropdown.contains(event.target)) {
+                        options.style.display = "none";
+                    }
+                });
+            });
+        });
+
+
+        //  search bar logic.
+
+        document.getElementById('search-input').addEventListener('input', function () {
+            var searchTerm = this.value.toLowerCase();
+            var items = document.getElementsByClassName('result-item');
+            var list = document.getElementsByClassName("main-file")
+
+            for (var i = 0; i < items.length; i++) {
+                var text = items[i].textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    list[i].style.display = 'flex';
+                } else {
+                    list[i].style.display = 'none';
+                }
+            }
+        });
+
+        // for select the checkboxes
+        function check() {
+            var mainCheckbox = document.querySelector('#option-select');
+            var allCheck = document.getElementsByName('files');
+            if (mainCheckbox.checked == true) {
+                for (let i = 0; i < allCheck.length; i++) {
+                    allCheck[i].checked = true;
+                }
+            }
+
+            else {
+                for (let i = 0; i < allCheck.length; i++) {
+                    allCheck[i].checked = false;
+                }
+            }
+        }
+
+        document.querySelector(".b1").addEventListener("click", function () {
+            document.querySelector("#delcheck").checked = true;
+            document.querySelector("#deleteform").submit();
+        });
+
+        document.querySelector(".b2").addEventListener("click", function () {
+            document.querySelector("#downcheck").checked = true;
+            document.querySelector("#deleteform").submit();
+        });
+
+
+
+        // rename popup
+
+        function showRenameModal(fileName) {
+            document.getElementById(`modal-${fileName}`).style.display = 'block';
+        }
+
+        function closeRenameModal(fileName) {
+            document.getElementById(`modal-${fileName}`).style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target === modals[i]) {
+                    modals[i].style.display = 'none';
+                }
+            }
+        }
+
+
+
+
+    </script>
+
+<%- include('partials/footer') %>

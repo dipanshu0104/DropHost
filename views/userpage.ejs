@@ -1,0 +1,88 @@
+<%- include('partials/header') %>
+    <div class="overlay"></div>
+    <div class="right">
+        <div class="user-container">
+            <center>
+                <div class="user-info">
+                    <form id="uploadform" action="/dp-upload" method="post" enctype="multipart/form-data">
+                        <input type="file" id="dp-file" name="image">
+                    </form>
+                    <div class="user-dp">
+                        <div class="dp">
+                            <img src="/images/<%= user.dp %>" alt="fire">
+                        </div>
+                        <div class="edit-icon" id="edit">
+                            <img src="/icons/edit-tool.svg" alt="edit">
+                        </div>
+                    </div>
+                    <p>
+                        <%= user.username %>
+                    </p> <br>
+
+                    <h3 class="deleteBtn">Delete Account</h3>
+
+                    <div class="del-ac">
+                        <h2 class="cancelBtn">&times;</h2>
+                        <p>Are you sure to delete the account ?</p> <br>
+                        <a href="/delete-ac">Delete</a>
+                    </div>
+
+                </div>
+                <div class="user-update">
+                    <div class="setting-nav">
+                        <h2>Setting</h2>
+                        <img src="/icons/arrow.svg" alt="arrow" class="arrow">
+                    </div>
+                </div>
+            </center>
+        </div>
+    </div>
+
+
+    <script>
+        document.querySelector("#edit").addEventListener('click', function () {
+            document.querySelector("#dp-file").click();
+        });
+
+        document.querySelector("#uploadform input").addEventListener('change', function () {
+            document.querySelector("#uploadform").submit();
+        });
+
+        //   show model 
+
+        let deleteBtn = document.querySelector(".deleteBtn");
+        deleteBtn.addEventListener("click", () => {
+            document.querySelector(".del-ac").classList.add('show-del-ac');
+            document.querySelector(".overlay").classList.add('show-overlay');
+        });
+
+        let cancelBtn = document.querySelector(".cancelBtn");
+        cancelBtn.addEventListener("click", () => {
+            document.querySelector(".del-ac").classList.remove('show-del-ac');
+            document.querySelector(".overlay").classList.remove('show-overlay');
+        });
+
+        let overlay = document.querySelector(".overlay");
+        overlay.addEventListener("click", () => {
+            document.querySelector(".del-ac").classList.remove('show-del-ac');
+            document.querySelector(".overlay").classList.remove('show-overlay');
+        });
+
+        
+        // setting div
+        let flag = 0;
+        document.querySelector('.arrow').addEventListener("click", function () {
+            if (flag == 0) {
+                document.querySelector(".user-update").style.height = "50px";
+                document.querySelector('.arrow').style.transform = "rotate(90deg)"
+                flag = 1;
+            } else {
+                document.querySelector(".user-update").style.height = "300px";
+                document.querySelector('.arrow').style.transform = "rotate(0deg)"
+                flag = 0;
+            }
+        });
+
+    </script>
+
+<%- include('partials/footer') %>

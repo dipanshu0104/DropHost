@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+    <!-- Deop zone area code -->
+    <div class="right">
+        <h1>Upload files</h1>
+        <div class="main-zone">
+            <section class="upload_container">
+                <div class="drop-zone">
+                    <div class="icon-container">
+                        <img src="./icons/drop-file.svg" alt="file icon" class="center" draggable="false">
+                        <img src="./icons/drop-file.svg" alt="file icon" class="left" draggable="false">
+                        <img src="./icons/drop-file.svg" alt="file icon" class="right" draggable="false">
+                    </div>
+                    <input type="file" id="fileInput" multiple>
+                    <div class="title">Drop your files here or, <span class="browseBtn">browse</span></div>
+                    <button onclick="uploadFiles()" class="hidden" id="show">Upload</button>
+                </div>
+
+
+                <!-- Uploading process bar code -->
+                <div class="pro">
+                    <p id="text" class="hidden">Uploading ...</p>
+                    <div id="progressText" class="hidden"> 0%</div>
+                </div>
+
+
+                <div id="progressContainer" class="hidden">
+                    <div id="progressBar"></div>
+                </div>
+            </section>
+            <script src="/javascripts/upload.js"></script>
+        </div>
+    </div>
+    <%- include('partials/footer') %>

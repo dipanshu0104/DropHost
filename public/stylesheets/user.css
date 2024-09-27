@@ -1,0 +1,199 @@
+.user-container {
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.user-container::-webkit-scrollbar {
+    display: none;
+}
+
+.user-info {
+    margin-top: 13px;
+    height: 50vh;
+    width: 80%;
+    background: #202528;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow:  0 2rem 3rem rgba(0, 0, 0, 0.4);
+}
+
+
+.user-info .user-dp {
+    height: 140px;
+    width: 140px;
+    position: relative;
+}
+
+.user-dp .dp {
+    height: 140px;
+    width: 140px;
+    border: 2px solid white;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.dp img {
+    height: 100%;
+}
+
+.user-dp .edit-icon {
+    height: 2rem;
+    width: 2rem;
+    background: rgb(0, 136, 255);
+    border-radius: 50%;
+    position: absolute;
+    right: 3px;
+    bottom: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-dp .edit-icon img {
+    height: 20px;
+}
+input[type="file"] {
+    display: none;
+}
+
+.user-info p {
+    margin-top: 5px;
+    color: #64788d;
+}
+
+.user-info h3 {
+    color: white;
+    font-size: 17px;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 7px 15px;
+    border-radius: 10px;
+    background: rgb(203, 51, 51);
+}
+
+.user-info h3:hover {
+    background: rgb(243, 61, 61);
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    opacity: 0;
+    transition: all .5s ease;
+}
+
+.show-overlay {
+    z-index: 2;
+    opacity: 1;
+}
+
+.del-ac {
+    width: 350px;
+    height: 150px;
+    position: absolute;
+    left: 50%;
+    top: -50%;
+    transform: translate(-50%, -50%);
+    background-color: #202528;
+    z-index: 2;
+    padding: 10px;
+    border-radius: 1rem;
+    transition: all .5s ease;
+}
+
+.show-del-ac {
+    top: 50%;
+}
+
+.del-ac h2 {
+    font-weight: 300;
+    color: white;
+    background-color: none;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 15px;
+
+}
+
+.del-ac p {
+    margin-top: 2rem;
+    display: block;
+}
+
+.del-ac a {
+    color: white;
+    font: 1rem;
+    font-weight: 400;
+    padding: 5px 15px;
+    background: rgb(203, 51, 51);
+    border-radius: 10px;
+    position: absolute;
+    bottom: 20px;
+    right: 35px;
+}
+
+.del-ac a:hover {
+    background: rgb(243, 61, 61)
+}
+
+.user-update {
+    margin-top: 2rem;
+    height: 300px;
+    width: 80%;
+    background: #202528;
+    border-radius: 2rem;
+    overflow: hidden;
+    transition: all .5s ease;
+}
+
+.user-update .setting-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 2rem;
+    height: 50px;
+    border-bottom: 2px solid rgb(153 202 255 / 6%)
+    
+}
+
+.user-update .setting-nav h2 {
+    color: white;
+    font-weight: 400;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.user-update .setting-nav img {
+    height: 26px;
+    cursor: pointer;
+    transition: all .5s ease;
+    padding: 8px;
+}
+
+@media (max-width: 768px) {
+    .user-container {
+        margin-top: 5rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .user-container .user-info {
+        width: 90%;
+    }
+
+    .del-ac {
+        width: 90%;
+        height: 170px;
+    }
+}
+

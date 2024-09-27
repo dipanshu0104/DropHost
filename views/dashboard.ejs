@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+
+    <div class="right">
+      <!-- Analysis area -->
+      <div class="analysis">
+        <h1>Analysis</h1>
+        <div class="cards-area">
+
+          <div class="cards">
+            <div class="info">
+              <h2>Total files</h2>
+              <p><%= numberOfFiles %> Files</p>
+            </div>
+            <img src="icons/document.svg" alt="document">
+          </div>
+
+          <div class="cards">
+            <div class="info">
+              <h2>Total Storage</h2>
+              <p><%= MB %> MB / <%= GB %> GB</p>
+            </div>
+            <img src="icons/circle.png" alt="document">
+          </div>
+
+          <div class="cards">
+            <div class="info">
+              <h2>User</h2>
+              <p><%= user.username %></p>
+            </div>
+            <img src="icons/active-user.svg" alt="document">
+          </div>
+
+          
+
+        </div>
+      </div>
+
+      <!-- file section -->
+
+      <div class="files">
+        <h1>Recent files</h1>
+        <div class="files-area">
+          <div class="file-container">
+            <% files.forEach(file => { %>
+              <div class="main-file">
+                <div class="left-info">
+                    <h3 class="result-item"><%= file %></h3>
+                </div>
+                <div class="dropdown">
+                    <!-- <img src="icons/dots.svg" alt="menu"> -->
+                </div>
+            </div>
+             <% }) %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <%- include('partials/footer') %>
+

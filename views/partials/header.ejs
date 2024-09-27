@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="icons/favicon.ico" />
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <link rel="stylesheet" href="stylesheets/myfiles.css">
+  <link rel="stylesheet" href="stylesheets/upload.css">
+  <link rel="stylesheet" href="stylesheets/user.css">
+  <title>DropHost | Your self hosted file uploading server</title>
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="nav-logo">
+      <img src="images/up.png" alt="logo">
+      <h1>Drop<span>Host</span></h1>
+      <div class="menubar">&#9776;</div>
+    </div>
+    <div class="dp-border">
+      <div class="dp-area">
+        <img src="/images/<%= user.dp %>" alt="dp">
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <div class="slide">
+
+      <div class="top">
+        <div class="logo">
+          <img src="images/up.png" alt="logo">
+          <h2>Drop<span class="left-name">Host</span></h2>
+        </div>
+        <h2 class="cancel-btn">&times;</h2>
+      </div>
+
+      <div class="sidebar">
+        <a href="/dashboard">
+          <img src="icons/dashboard.svg" alt="dashborrd">
+          <h3>Dashboard</h3>
+        </a>
+
+        <a href="/upload_file">
+          <img src="icons/upload.svg" alt="upload">
+          <h3>Upload</h3>
+        </a>
+
+        <a href="/myfiles">
+          <img src="icons/my-files.svg" alt="upload">
+          <h3>My files</h3>
+        </a>
+
+        <a href="/user" id="uploadBtn">
+          <img src="icons/user.svg" alt="user">
+          <h3>User</h3>
+        </a>
+
+      <!--  <a href="#">
+          <img src="icons/setting.svg" alt="settings">
+          <h3>Settings</h3>
+        </a> -->
+
+        <a href="/logout">
+          <img src="icons/logout.svg" alt="logout">
+          <h3>logout</h3>
+        </a>
+      </div>
+    </div>
